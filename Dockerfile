@@ -15,7 +15,7 @@ MAINTAINER Dave Wheeler NSWDPI
 
 # Set up ubuntu dependencies
 RUN apt-get update -y && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata vim wget git nano build-essential curl libgl1 libglib2.0-0 libsm6 libxrender1 libxext6 && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata vim wget git nano build-essential curl libgl1 libglib2.0-0 libsm6 libxrender1 libxext6 ca-certificates pandoc && \
   rm -rf /var/lib/apt/lists/*
 
 ###### 
@@ -25,9 +25,9 @@ WORKDIR /build
 # Intall anaconda 3.9
 ENV PATH="/build/miniconda3/bin:${PATH}"
 ARG PATH="/build/miniconda3/bin:${PATH}"
-RUN curl -o miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-py39_22.11.1-1-Linux-x86_64.sh &&\
+RUN curl -o miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-py39_22.11.1-1-Linux-x86_64.sh && \
 	mkdir /build/.conda && \
-	bash miniconda.sh -b -p /build/miniconda3 &&\
+	bash miniconda.sh -b -p /build/miniconda3 && \
 	rm -rf miniconda.sh
 
 RUN conda --version
@@ -38,7 +38,5 @@ RUN git clone https://dpidave@bitbucket.org/dpi_data_analytics/snakemake-qiime-e
 
 # install dependencies
 RUN conda install -n base -c conda-forge mamba
+RUN mamba init
 RUN mamba env create -f snakemake-qiime-edna/env/qiime2-2023.2-snakemake-py38-linux-conda.yml
-RUN mamba activate snakemake-qiime2
-
-CMD /bin/bash
