@@ -6,3 +6,4 @@ A qiime2 based eDNA anaylsis pipeline running in a docker container based on Ubu
 This anaylsis pipeline will process a folder of paired-end fastq files.
 
 ## Instructions  
+This is the
