@@ -6,14 +6,14 @@
       function navigate() {
         window.location.href = 'done';  // redirect when done!
       }
-      fetch('slow').then(navigate); // load the slow url then navigate
+      fetch('pipeline').then(navigate); // load the slow url then navigate
     </script>
   </head>
 
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <p class="lead">Pipeline is running! </p>
-    <p class="lead">Please check {{ name }} for results </p>
+    <p class="lead">Please wait while the pipeline is running! </p>
+    <p class="lead">A new page will load when the job is done </p>
     <p class="mt-5"> <a href="/">Try again</a></p>
 </div>
 

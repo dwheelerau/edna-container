@@ -2,7 +2,6 @@ import os
 import time
 from flask import Flask, flash, request, redirect, url_for, render_template
 import subprocess
-from werkzeug.utils import secure_filename
 
 from jinja2 import Template
 import codecs
@@ -25,10 +24,12 @@ def runner():
 # Setting up Flask
 FASTQ_FOLDER = os.path.join(os.getcwd(), 'snakemake-qiime-edna','fastq_data')
 print(FASTQ_FOLDER)
+STATIC_FOLDER = os.path.join(os.getcwd(), 'static')
+print(FASTQ_FOLDER)
 
-app = Flask(__name__, static_url_path=FASTQ_FOLDER, static_folder=FASTQ_FOLDER)
+app = Flask(__name__, static_url_path=STATIC_FOLDER, static_folder=STATIC_FOLDER)
 app.secret_key = "secret_key"
-app.config["FASTQ_FOLDER"] = FASTQ_FOLDER
+#app.config["FASTQ_FOLDER"] = FASTQ_FOLDER
 
 # home page
 @app.route('/')
@@ -42,14 +43,13 @@ def index():
 @app.route('/infer', methods=['POST'])
 def upload_image():
     print("called POST")
-    file = request.files['file']
+    #file = request.files['file']
     file_list = request.files.getlist('file')
     if len(file_list)>0: #and allowed_file(file.filename):
         for file in file_list:
-            filename = secure_filename(file.filename)
-            print(filename)
-            file.save(os.path.join(app.config['FASTQ_FOLDER'], filename))
-        #return render_template('inference.html', name=FASTQ_FOLDER)
+            filename = os.path.basename(file.filename)
+            dst = os.path.join(FASTQ_FOLDER, filename)
+            file.save(dst)
         return redirect(url_for('edit_config'))
 
     else:
@@ -94,10 +94,11 @@ def done():
 def running():
     return render_template('running.html')
 
-@app.route('/slow')
-def slow():
+@app.route('/pipeline')
+def pipeline():
     #running()
-    time.sleep(10)
+    snakemake_run_cmd = 'snakemake --cores all --snakefile snakemake-qiime-edna/Snakefile --directory ./snakemake-qiime-edna/ all'.split()
+    subprocess.run(snakemake_run_cmd, shell=False)
     return "done running"
 
 if __name__ == "__main__":
