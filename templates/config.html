@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="post">
+  Project Name: <input name="name"/>
+  <br/><br/>
+  forward primer: <input name="fprimer" value="ACACCGCCCGTCAYYCT"/>
+  <br/><br/>
+   Reverse primer: <input name="rprimer" value="CTTCCGGTAYACTTACCRTG"/>
+  <br/><br/>
+  trunc-len-f: <input name="tlf" value="0"/>
+  <br/><br/>
+   trunc-len-r: <input name="tlr" value="0"/>
+  <br/><br/>
+  max-ee-f: <input name="maxef" value="2" />
+  <br/><br/>
+  max-ee-r: <input name="maxer" value="4" />
+  <br/><br/>
+  trunc-q: <input name="truncq" value="2" />
+  <br/><br/>
+  chimera-method: <input name="chimera" value="consensus" />
+  <br/><br/>
+  classifier: <input name="classifier" value="database/qiime2-qza/MIDORI2_UNIQ_NUC_GB253_srRNA_QIIME-classifier.qza"/>
+  <br/><br/>
+  <button type="submit">Run pipeline!</button>
+</form>
+
+{% endblock %}

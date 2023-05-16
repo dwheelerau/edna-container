@@ -26,27 +26,25 @@ def upload_image():
     print("called POST")
     file = request.files['file']
     file_list = request.files.getlist('file')
-    print(file_list[0].filename)
     if len(file_list)>0: #and allowed_file(file.filename):
-        processed_files = []
         for file in file_list:
             filename = secure_filename(file.filename)
             print(filename)
             file.save(os.path.join(app.config['FASTQ_FOLDER'], filename))
-            # call to inference
-            #masked_image_filename = run_inference(url_for('static', filename=filename))
-            #processed_files.append(masked_image_filename)
-            #flash('Image {} successfully uploaded:'.format(filename))
+        #return render_template('inference.html', name=FASTQ_FOLDER)
+        return redirect(url_for('edit_config'))
 
-            # return render_template('upload.html', filename=masked_image_filename)
-        # This next part is redundant
-        #filename=file_list[0].filename
-        #masked_image_filename=processed_files[0]
-        # need to change logic here to display thumbnames
-        return render_template('inference.html', name=FASTQ_FOLDER)#,filename=masked_image_filename)
     else:
         flash('please select a dir')
         return redirect(request.url)
+
+# config
+@app.route('/config', methods=['GET', 'POST'])
+def edit_config():
+    if request.method == 'POST':
+        print(request.form['name'])
+    print('called edit config')
+    return render_template('config.html')
 
 
 if __name__ == "__main__":
