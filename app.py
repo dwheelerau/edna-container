@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import os
 import time
 from flask import Flask, flash, request, redirect, url_for, render_template
