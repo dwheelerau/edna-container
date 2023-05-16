@@ -101,6 +101,8 @@ def pipeline():
     #running()
     snakemake_run_cmd = 'snakemake --cores all --snakefile snakemake-qiime-edna/Snakefile --directory ./snakemake-qiime-edna/ all'.split()
     subprocess.run(snakemake_run_cmd, shell=False)
+    zip_cmd = 'zip -FSr static/results.zip snakemake-qiime-edna'.split()
+    subprocess.run(zip_cmd, shell=False)
     return "done running"
 
 if __name__ == "__main__":
