@@ -3,6 +3,8 @@ from flask import Flask, flash, request, redirect, url_for, render_template
 import subprocess
 from werkzeug.utils import secure_filename
 
+from jinja2 import Template
+import codecs
 # setup the qiime folder structure
 # run clean?
 snakemake_setup_cmd = 'snakemake --cores all --snakefile snakemake-qiime-edna/Snakefile --directory ./snakemake-qiime-edna/ setup'.split()
@@ -42,7 +44,25 @@ def upload_image():
 @app.route('/config', methods=['GET', 'POST'])
 def edit_config():
     if request.method == 'POST':
-        print(request.form['name'])
+        data = {
+                'name':request.form['name'],
+                'fprimer':request.form['fprimer'],
+                'rprimer':request.form['rprimer'],
+                'tlf':request.form['tlf'],
+                'tlr':request.form['tlr'],
+                'maxef':request.form['maxef'],
+                'maxer':request.form['maxer'],
+                'truncq':request.form['truncq'],
+                'chimera':request.form['chimera'],
+                'classifier':request.form['classifier'],
+                }
+
+        with open('./snakemake-qiime-edna/config-template.yaml') as rf:
+            template = Template(rf.read(), trim_blocks=True)
+        render_file = template.render(data)
+        outfile = codecs.open('./snakemake-qiime-edna/config.yaml', 'w', 'utf-8')
+        outfile.write(render_file)
+        outfile.close()
     print('called edit config')
     return render_template('config.html')
 
