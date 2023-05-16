@@ -12,6 +12,12 @@ docker images
 ### copy IMAGEID ###
 sudo docker run -p 80:5000 --rm IMAGEID
 ```
+
+## Docker hub
+```
+sudo docker push dwheelerau/edna:edna
+```
+
 ## Install
 sudo docker build -f Dockerfile . -t dwheelerau/edna:ubuntu2004
 ```
