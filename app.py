@@ -1,14 +1,26 @@
 import os
+import time
 from flask import Flask, flash, request, redirect, url_for, render_template
 import subprocess
 from werkzeug.utils import secure_filename
 
 from jinja2 import Template
 import codecs
-# setup the qiime folder structure
-# run clean?
-snakemake_setup_cmd = 'snakemake --cores all --snakefile snakemake-qiime-edna/Snakefile --directory ./snakemake-qiime-edna/ setup'.split()
-subprocess.run(snakemake_setup_cmd, shell=False)
+
+# setup the qiime folder structure and remove any old runs
+def cleanup():
+    snakemake_clean_cmd = 'snakemake --cores all --snakefile snakemake-qiime-edna/Snakefile --directory ./snakemake-qiime-edna/ clean'.split()
+    subprocess.run(snakemake_clean_cmd, shell=False)
+
+def setup():
+    snakemake_setup_cmd = 'snakemake --cores all --snakefile snakemake-qiime-edna/Snakefile --directory ./snakemake-qiime-edna/ setup'.split()
+    subprocess.run(snakemake_setup_cmd, shell=False)
+
+def runner():
+    print("running")
+    time.sleep(10)
+    return 1
+
 
 # Setting up Flask
 FASTQ_FOLDER = os.path.join(os.getcwd(), 'snakemake-qiime-edna','fastq_data')
@@ -21,6 +33,10 @@ app.config["FASTQ_FOLDER"] = FASTQ_FOLDER
 # home page
 @app.route('/')
 def index():
+    # remove any old data
+    cleanup()
+    # setup dir structure
+    setup()
     return render_template('index.html')
 
 @app.route('/infer', methods=['POST'])
@@ -63,9 +79,26 @@ def edit_config():
         outfile = codecs.open('./snakemake-qiime-edna/config.yaml', 'w', 'utf-8')
         outfile.write(render_file)
         outfile.close()
+        # run the pipeline
+        #runner()
+        return redirect(url_for('running'))
     print('called edit config')
     return render_template('config.html')
 
+# done
+@app.route('/done')
+def done():
+    return render_template('done.html')
+
+@app.route('/running')
+def running():
+    return render_template('running.html')
+
+@app.route('/slow')
+def slow():
+    #running()
+    time.sleep(10)
+    return "done running"
 
 if __name__ == "__main__":
 	app.debug = True

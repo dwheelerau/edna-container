@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<script>
+      function navigate() {
+        window.location.href = 'done';  // redirect when done!
+      }
+      fetch('slow').then(navigate); // load the slow url then navigate
+    </script>
+  </head>
+
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <p class="lead">Pipeline is running! </p>
+    <p class="lead">Please check {{ name }} for results </p>
+    <p class="mt-5"> <a href="/">Try again</a></p>
+</div>
+
+{% endblock %}
+
