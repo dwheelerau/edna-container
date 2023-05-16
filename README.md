@@ -5,6 +5,13 @@ A qiime2 based eDNA anaylsis pipeline running in a docker container based on Ubu
 ## Introduction  
 This anaylsis pipeline will process a folder of paired-end fastq files.
 
+## Running from flask
+```
+sudo docker build -f Dockerfile . -t dwheelerau/edna:edna
+docker images
+### copy IMAGEID ###
+sudo docker run -p 80:5000 --rm IMAGEID
+```
 ## Install
 sudo docker build -f Dockerfile . -t dwheelerau/edna:ubuntu2004
 ```

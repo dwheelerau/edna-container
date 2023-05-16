@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import sys
 import time
 from flask import Flask, flash, request, redirect, url_for, render_template
 import subprocess
@@ -25,7 +26,7 @@ def runner():
 
 # Setting up Flask
 FASTQ_FOLDER = os.path.join(os.getcwd(), 'snakemake-qiime-edna','fastq_data')
-print(FASTQ_FOLDER)
+RUN_LOG_FILE = os.path.join(os.getcwd(), 'snakemake-qiime-edna','logs', 'runlog.txt')
 STATIC_FOLDER = os.path.join(os.getcwd(), 'static')
 print(FASTQ_FOLDER)
 
