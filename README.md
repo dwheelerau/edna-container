@@ -32,7 +32,7 @@ Downloading the image (~7GB) will take some time depending on your internet conn
 4. The image should appear in your Docker desktop app under the 'images' section (see screen shot below). 
 Click the copy icon next to the iamge id code as shown below (this code will be used in the next command). 
 
-![Use the copy icon to copy the image ID for dwheelerau/edna](image1.PND).
+![Use the copy icon to copy the image ID for dwheelerau/edna](image1.PNG).
 
 5. Type the following command in the terminal window replacing "IMAGEID"
 with the code you copied above (you can "paste" by right clicking on the command prompt window boarder
