@@ -40,7 +40,7 @@ and selecting edit->paste).
 ```
 docker run -p 80:5000 --rm IMAGEID
 ```
-![The IMAGEID is used to run the container](image2.PNG)
+![The bottom run command uses the IMAGEID to run the container](image2.PNG)
 
 6. Open a internet browser (we recommend chrome or firebox) and enter the following IP address  
 ```
@@ -50,14 +50,16 @@ The following window should open (after a short wait for the app to start). Any 
 the run should appear in the command prompt window.
 ![The start screen](image3.PNG)
 
-7. Select the folder where the fastq.gz sequencing files for this project are located and accept the image upload dialogue.
+7. Using the 'select' or 'browse' button select the folder where the fastq.gz sequencing files for this project are located and accept the image upload dialogue.
 ![Click accept](image4.PNG)
 
 8. Click 'process folder' button and update the settings on the next page as required (the default if the telo fish eDNA primers)
+![Modify the run-time paramaters as required](image7.PNG)
+
 9. When you are ready use the 'Run pipeline!' button to run the application on your data (the progress will be logged to the command prompt terminal window).
 ![Progress as well as errors will be logged to the command prompt screen](image5.PNG)
 
-11. A running screen will be replaced by a 'project' with a download link to the results. Any errors will be reported in the command prompt window.
+10. A running screen will be replaced by a download link to the results (zipped folder). Any errors will be reported in the command prompt window.
 ![Analysis completed](image6.PNG) 
 
 ## Running the image in a container on Linux
