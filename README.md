@@ -62,6 +62,8 @@ the run should appear in the command prompt window.
 10. A running screen will be replaced by a download link to the results (zipped folder). Any errors will be reported in the command prompt window.
 ![Analysis completed](image6.PNG) 
 
+If you wish to re-use the pipeline in the future, simply open the Docker-desktop app and follow the instructions from Step 5.
+
 ## Running the image in a container on Linux
 1. Make sure you have Docker installed on your OS
 2. Pull the image from a terminal window
@@ -91,3 +93,4 @@ Quick start after cloning this repository:
 cd edna-contained
 sudo docker build -f Dockerfile . -t dwheelerau/edna:edna
 ```
+Once the image is stored on your computer the `docker run` command can be used to run the app.
