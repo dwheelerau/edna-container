@@ -32,7 +32,7 @@ Downloading the image (~7GB) will take some time depending on your internet conn
 4. The image should appear in your Docker desktop app under the 'images' section (see screen shot below). 
 Click the copy icon next to the iamge id code as shown below (this code will be used in the next command). 
 
-![Use the copy icon to copy the image ID for dwheelerau/edna](image1.PNG).
+![Use the copy icon to copy the image ID for dwheelerau/edna](images/image1.PNG).
 
 5. Type the following command in the terminal window replacing "IMAGEID"
 with the code you copied above (you can "paste" by right clicking on the command prompt window boarder
@@ -40,7 +40,7 @@ and selecting edit->paste).
 ```
 docker run -p 80:5000 --rm IMAGEID
 ```
-![The bottom run command uses the IMAGEID to run the container](image2.PNG)
+![The bottom run command uses the IMAGEID to run the container](images/image2.PNG)
 
 6. Open a internet browser (we recommend chrome or firebox) and enter the following IP address  
 ```
@@ -48,19 +48,19 @@ http://127.0.0.1:80
 ```
 The following window should open (after a short wait for the app to start). Any errors during 
 the run should appear in the command prompt window.
-![The start screen](image3.PNG)
+![The start screen](images/image3.PNG)
 
 7. Using the 'select' or 'browse' button select the folder where the fastq.gz sequencing files for this project are located and accept the image upload dialogue.
-![Click accept](image4.PNG)
+![Click accept](images/image4.PNG)
 
 8. Click 'process folder' button and update the settings on the next page as required (the default if the telo fish eDNA primers)
-![Modify the run-time paramaters as required](image7.PNG)
+![Modify the run-time paramaters as required](images/image7.PNG)
 
 9. When you are ready use the 'Run pipeline!' button to run the application on your data (the progress will be logged to the command prompt terminal window).
-![Progress as well as errors will be logged to the command prompt screen](image5.PNG)
+![Progress as well as errors will be logged to the command prompt screen](images/image5.PNG)
 
 10. A running screen will be replaced by a download link to the results (zipped folder). Any errors will be reported in the command prompt window.
-![Analysis completed](image6.PNG) 
+![Analysis completed](images/image6.PNG) 
 
 If you wish to re-use the pipeline in the future, simply open the Docker-desktop app and follow the instructions from Step 5.
 
