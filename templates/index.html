@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<script>
+        function unDisable() {
+            document.getElementById('inputGroupFileAddon04').disabled = false;
+        }
+    </script>
+
 <div class="row">
   <div class="col-sm-8 offset-sm-2">
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
@@ -15,12 +22,12 @@
       <div class="input-group">
         <div class="custom-file">
           <input type="file" name="file" webkitdirectory="" class="custom-file-input" id="inputGroupFile" 
-            aria-describedby="inputGroupFileAddon04" >
+            aria-describedby="inputGroupFileAddon04" onclick="unDisable()" >
           <label class="custom-file-label" for="inputGroupFile">Choose folder</label>
         </div>
         <div class="input-group-append">
           <input type="submit" value="Process folder"  class="btn btn-outline-secondary" type="button"
-            id="inputGroupFileAddon04" /> 
+            id="inputGroupFileAddon04" disabled="disabled" /> 
         </div>
       </div>
     </form>
