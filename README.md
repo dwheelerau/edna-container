@@ -1,4 +1,4 @@
-# eDNA-contained
+# The eDNA-container app
 
 ## Introduction
 A Docker image containing a eDNA/amplicon pipeline based on
