@@ -27,6 +27,8 @@ def runner():
 # Setting up Flask
 FASTQ_FOLDER = os.path.join(os.getcwd(), 'snakemake-qiime-edna','fastq_data')
 RUN_LOG_FILE = os.path.join(os.getcwd(), 'snakemake-qiime-edna','logs', 'runlog.txt')
+DATABASE_FOLDER = os.path.join(os.getcwd(), 'snakemake-qiime-edna', 'database',
+                               'qiime2-qza')
 STATIC_FOLDER = os.path.join(os.getcwd(), 'static')
 print(FASTQ_FOLDER)
 
@@ -63,6 +65,15 @@ def upload_image():
 @app.route('/config', methods=['GET', 'POST'])
 def edit_config():
     if request.method == 'POST':
+        print(request.files)
+        if request.files['file']:
+            file = request.files['file']
+            filename=os.path.basename(file.filename)
+            dst = os.path.join(DATABASE_FOLDER, filename)
+            file.save(dst)
+        else:
+            # the default midori database
+            dst = "database/qiime2-qza/MIDORI2_UNIQ_NUC_GB253_srRNA_QIIME-classifier.qza"
         data = {
                 'name':request.form['name'],
                 'fprimer':request.form['fprimer'],
@@ -73,7 +84,7 @@ def edit_config():
                 'maxer':request.form['maxer'],
                 'truncq':request.form['truncq'],
                 'chimera':request.form['chimera'],
-                'classifier':request.form['classifier'],
+                'classifier':dst,
                 }
 
         with open('./snakemake-qiime-edna/config-template.yaml') as rf:

@@ -6,31 +6,36 @@ Please provide key details of the project so the pipeline will run correctly. No
 defaults are reasonable settings for most projects. The primers shown are
 the teleo fish primers.
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
   Project Name: <input name="name" value="Example eDNA project"/>
-  <br/><br/>
+  <br><br>
   Primer information required for trimming
-  <br/>
-  Forward primer (5'-3'): <input name="fprimer" value="ACACCGCCCGTCAYYCT"/>
-  <br/>
-   Reverse primer (5'-3'): <input name="rprimer" value="CTTCCGGTAYACTTACCRTG"/>
-  <br/><br/>
+  <br>
+  Forward primer (5'-3'): <input style="width: 100%" name="fprimer" value="ACACCGCCCGTCAYYCT"/>
+  <br>
+   Reverse primer (5'-3'): <input style="width: 100%" name="rprimer" value="CTTCCGGTAYACTTACCRTG"/>
+  <br><br>
   For information on these settings for DADA2 see <a href="https://docs.qiime2.org/2023.2/plugins/available/dada2/denoise-paired/" target="_blank">here</a>.
-  <br/>
+  <br>
   trunc-len-f: <input name="tlf" value="0"/>
-  <br/>
+  <br>
    trunc-len-r: <input name="tlr" value="0"/>
-  <br/>
+  <br>
   max-ee-f: <input name="maxef" value="2" />
-  <br/>
+  <br>
   max-ee-r: <input name="maxer" value="4" />
-  <br/>
+  <br>
   trunc-q: <input name="truncq" value="2" />
-  <br/>
+  <br>
   chimera-method: <input name="chimera" value="consensus" />
-  <br/><br/>
-  <strong>This is the path to the classifier database (please make sure this file exists)</strong><br/>
-  classifier (Please do not modify): <input name="classifier" value="database/qiime2-qza/MIDORI2_UNIQ_NUC_GB253_srRNA_QIIME-classifier.qza"/>
+  <br><br>
+  <strong>OPTIONAL: </strong>The default taxonomic database is based on <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/edn3.303">MIDORI2</a><br>
+  <br>
+  If you want to select another database navigate to the file using this upload button
+<div class="custom-file">
+    <input type="file" name="file" class="custom-file-input" id="inputGroupFile02">
+    <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Optionally choose a compatible QIIME2 taxonomic database *.qza file</label>
+  </div>
   <br/><br/>
   <button type="submit">Run pipeline!</button>
 </form>
