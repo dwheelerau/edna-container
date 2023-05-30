@@ -28,7 +28,7 @@ WORKDIR /home/docker_conda_template
 COPY . .
 
 # make boot script runable
-RUN chmod +x boot.sh
+#RUN chmod +x boot.sh
 
 # clone the repo
 RUN git clone https://dpidave@bitbucket.org/dpi_data_analytics/snakemake-qiime-edna.git
