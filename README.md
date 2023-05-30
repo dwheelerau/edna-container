@@ -17,13 +17,53 @@ in the users browser.
 The pipeline can also be used without Docker as described at this [repo](https://bitbucket.org/dpi_data_analytics/snakemake-qiime-edna/src/master/).  
 
 ## Running the image in a container on Windows
-Ensure that the Docker-desktop app is installed on your windows computer. A 
-complete guide for installing and running Docker images in general can be found
-at [here](https://github.com/dwheelerau/docker-guide).  
+Ensure that the Docker-desktop app is installed on your windows computer. The
+offical guide for installing Docker-desktop can be found [here](https://docs.docker.com/desktop/install/windows-install/).
+If you run into any issues a more complete guide is available
+[here](https://github.com/dwheelerau/docker-guide).  
 
-1. Start by opening the Docker-desktop app (this needs to be running for the following to work).  
-2. Open the "command prompt" using the windows start menu
-3. Type the following in the terminal window to obtain a copy of the image.  
+1. Start by opening the Docker-desktop app.  
+2. In the search bar at the top of the page search for `dwheelerau/edna`, then use the "Pull"
+button to obtain a copy of the pipeline image.  
+![Search dockerhub for the pipeline image under "dwheelerau/edna"](images/dh1.PNG)
+
+3. After the image has downloaded click the "Run" button.  
+![Start a container using the Run button](images/dh2.PNG)
+
+4. Use the "Optional settings" drop down to open host port 5000 as shown in the image
+below, then click "Run".  
+![Add 5000 to the "Host port" option](images/dh3.PNG)
+
+5. The log section of the container should look like the image below, this is showning the IP
+address for The eDNA-container app user interface, click on the top link or type `http://127.0.0.1:5000`
+in an internet browser (**Note:** No data is transfered over the internet, the pipeline will
+run using the local computer resources).
+![Click on the top link to open the user interface in a browser window](iamges/dh4.PNG)
+
+6. Please wait a few seconds while the pipeline setup beings, if this has been successful the
+following screen should display.
+![The eDNA-container app welcome screen](images/dh5.PNG)
+
+Follow the instructions below to carry out an eDNA analysis using the pipeline. **Note** for
+future runs on the pipeline all that is required is to click the "Play" Button next to the 
+container ID in the Docker-desktop app. Remember to shutdown the container using the "Stop"
+button to free up system resources after you have completed the analysis.
+
+## Analysing paired-end sequencing data using The eDNA-container app  
+The pipeline is currently only configured to process paired-end fastq.gz sequencing files.
+Ensure that only the files you wish to analyse are in their own directory.
+
+1. Using the browser based user interface select the folder of fastq.gz files that you wish to process.
+![Select the sequencing folder using the file explorer dialogue]()
+
+2. Click the "Process folder" button.
+3. The next page is the settings page, the following table details each option
+
+```
+table
+```
+
+## Running the pipeline using terminal commands  
 ```
 docker pull dwheelerau/edna:edna
 ```
