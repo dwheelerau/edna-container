@@ -1,7 +1,7 @@
 # The eDNA-container app
 
 ## Introduction
-A Docker image containing a eDNA/amplicon pipeline based on
+A Docker image containing a eDNA pipeline based on
 [QIIME2](https://qiime2.org/). The pipeline is controlled via flask GUI that runs
 in the users browser.   
 
@@ -57,12 +57,14 @@ to analyse.
 1. Using the browser based user interface select the target folder of `fastq.gz` files that you wish 
 to process through the pipeline and click the "Upload" button (note no data is transfered
 over the internet).  
-![Select the sequencing folder using the file explorer dialogue](images/iamge4.PNG)
+![Select the sequencing folder using the file explorer dialogue](images/image4.PNG)
 
 2. Click the "Process folder" button to open the settings page.  
 ![The settings page allows you to alter the runtime parameters](images/settings.png)
 
-3. The next page is the settings page, the following table details each option.
+3. The next page is the settings page, the following table details each option. **Note** 
+be sure to set `trunc-len-f` and `trunc-len-r` to 0 when using variable length amplicons
+in order to avoid introducting trimming biases.  
 
 | Setting  | Explanation  |
 |---|---|
@@ -91,7 +93,7 @@ to data stored inside the eDNA-container app.
 ## Key outputs
 | file path  | Explanation  |
 |---|---|
-| report.pdf  | A PDF report describing some key outputs from your run |
+| fina-report.pdf  | A PDF report describing some key outputs from your run |
 |   |  |
 |   |  |
 |   |   |
