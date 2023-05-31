@@ -51,17 +51,59 @@ button to free up system resources after you have completed the analysis.
 
 ## Analysing paired-end sequencing data using The eDNA-container app  
 The pipeline is currently only configured to process paired-end fastq.gz sequencing files.
-Ensure that only the files you wish to analyse are in their own directory.
+Ensure that the target directory only contains sequencing data for the samples you wish
+to analyse.
 
-1. Using the browser based user interface select the folder of fastq.gz files that you wish to process.
-![Select the sequencing folder using the file explorer dialogue]()
+1. Using the browser based user interface select the target folder of `fastq.gz` files that you wish 
+to process through the pipeline and click the "Upload" button (note no data is transfered
+over the internet).  
+![Select the sequencing folder using the file explorer dialogue](images/iamge4.PNG)
 
-2. Click the "Process folder" button.
-3. The next page is the settings page, the following table details each option
+2. Click the "Process folder" button to open the settings page.  
+![The settings page allows you to alter the runtime parameters](images/settings.png)
 
-```
-table
-```
+3. The next page is the settings page, the following table details each option.
+
+| Setting  | Explanation  |
+|---|---|
+| Project name  | A name for your project (will be used as the project title) |
+| Forward primer  | Forward PCR primer sequence for cutadapt primer/adapter removal |
+| Forward primer  | Reverse PCR primer sequence for cutadapt primer/adapter removal |
+| trunc-len-f  | Remove 3' end of forward read at this position due to low quality  |
+| trunc-len-r  | Remove 3' end of reverse read at this position due to low quality |
+| max-ee-f  | Forward reads with > number expected errors will be discarded  |
+| max-ee-r  | Reverse reads with > number expected errors will be discarded  |
+| trunc-q  | Truncate reads at first instance of quality score <= value |
+| chimera-method  | chimera removal method: consensus, pooled, or none  |
+| Taxonomic database  | File location for a QIIME2 compatible (.qza) naive_bayes clasifier (optional)  |
+
+Table describing the key settings; for additional information see the 
+[DADA2](https://docs.qiime2.org/2023.2/plugins/available/dada2/denoise-paired/)
+and [naive_bayes classifier](https://docs.qiime2.org/2022.2/plugins/available/feature-classifier/fit-classifier-naive-bayes/) 
+pages. A classifier based on the MIDORI2 database (12S rRNA) and the Telo fish primer amplicon
+is provided as a default (F:5'ACACCGCCCGTCAYYCT3'/R:5'CTTCCGGTAYACTTACCRTG3'). 
+
+4. When you are ready click the "Run pipeline!" command to start the analysis. A data submitted screen (below)
+will be replaced by a Download data link once the pipeline has completed. As noted before this analysis
+is performed on your own computer inside your local Docker environment with the download link a shortcut
+to data stored inside the eDNA-container app.
+
+## Key outputs
+| file path  | Explanation  |
+|---|---|
+| report.pdf  | A PDF report describing some key outputs from your run |
+|   |  |
+|   |  |
+|   |   |
+|   |  |
+|   |   |
+|   |   |
+|   |  |
+|   |   |
+|   |   |
+
+
+### 
 
 ## Running the pipeline using terminal commands  
 ```
