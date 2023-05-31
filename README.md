@@ -38,7 +38,7 @@ below, then click "Run".
 address for The eDNA-container app user interface, click on the top link or type `http://127.0.0.1:5000`
 in an internet browser (**Note:** No data is transfered over the internet, the pipeline will
 run using the local computer resources).
-![Click on the top link to open the user interface in a browser window](iamges/dh4.PNG)
+![Click on the top link to open the user interface in a browser window](images/dh4.PNG)
 
 6. Please wait a few seconds while the pipeline setup beings, if this has been successful the
 following screen should display.
