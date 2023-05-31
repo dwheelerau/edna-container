@@ -64,13 +64,15 @@ over the internet).
 
 3. The next page is the settings page, the following table details each option. **Note** 
 be sure to set `trunc-len-f` and `trunc-len-r` to 0 when using variable length amplicons
-in order to avoid introducting trimming biases.  
+in order to avoid introducting trimming biases. We recommend running the pipeline initially
+with the default quality settings and then adjusting these based on the outputs
+pressented in the `final-report.pdf` (specifically the raw read QC plots and DADA2 tables).
 
 | Setting  | Explanation  |
 |---|---|
 | Project name  | A name for your project (will be used as the project title) |
 | Forward primer  | Forward PCR primer sequence for cutadapt primer/adapter removal |
-| Forward primer  | Reverse PCR primer sequence for cutadapt primer/adapter removal |
+| Reverse primer  | Reverse PCR primer sequence for cutadapt primer/adapter removal |
 | trunc-len-f  | Remove 3' end of forward read at this position due to low quality  |
 | trunc-len-r  | Remove 3' end of reverse read at this position due to low quality |
 | max-ee-f  | Forward reads with > number expected errors will be discarded  |
