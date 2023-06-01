@@ -55,6 +55,9 @@ The pipeline is currently only configured to process paired-end fastq.gz sequenc
 Ensure that the target directory only contains sequencing data for the samples you wish
 to analyse.
 
+We have included test data in the test_data folder if you wish to try out the pipeline (just
+use the default settings).
+
 1. Using the browser based user interface select the target folder of `fastq.gz` files that you wish 
 to process through the pipeline and click the "Upload" button (note no data is transfered
 over the internet).  
@@ -92,33 +95,32 @@ is provided as a default (F:5'ACACCGCCCGTCAYYCT3'/R:5'CTTCCGGTAYACTTACCRTG3').
 will be replaced by a Download data link once the pipeline has completed. As noted before this analysis
 is performed on your own computer inside your local Docker environment with the download link a shortcut
 to data stored inside the eDNA-container app.
-[The download results page](images/complete.png)
+![The download results page](images/complete.png)
 
-A summary of the key outputs are below. If any of these are missing it is likely the pipeline has failed on your
-data, if this occurs see the FAQ. Any file ending in .qzv can be viewed by drag and drop into the 
-[QIIME2 viewer](https://view.qiime2.org/).
+A summary of the key outputs are below. If your analysis fails you will be notified by a message
+on the user interface, if this occurs see the FAQ. Any file ending in .qzv can be viewed by drag 
+and drop into the [QIIME2 viewer](https://view.qiime2.org/). You can also test the pipeline using
+the defaults with the example data in the testing_data folder.
 
 ## Key outputs
 | file path  | Explanation  |
 |---|---|
-| final-report.pdf  | A PDF report describing some key outputs from your run |
-| qiime2/loci/asvs/asv_count_tax_seqs_summary.csv  | Final spreadsheet of eDNA taxa counts  |
-| rarefaction/viz/barchart.qzv  | Alpha diversity rarefaction plot viewable using the qiime2 viewer  |
-| qiime2/loci/paired-end-demux.qzv  | Read quality plots viewable using the qiime2 viewer  |
-|   |  |
-|   |   |
-|   |   |
-|   |  |
-|   |   |
-|   |   |
-
-
+| final_results/final-report.pdf  | A PDF report describing some key outputs from your run |
+| final_results/asv_count_tax_seqs_summary.csv  | Final spreadsheet of eDNA taxa counts  |
+| final_results/barchart.qzv  | species barplot  |
+| final_results/alpha_rarefaction.qzv  | Alpha diversity rarefaction plot viewable using the qiime2 viewer  |
+| paired-end-demux.qzv  | Read quality plots viewable using the qiime2 viewer  |
+|  final_results/asvs | Amplified Sequence Variant files |
+| logs  | DADA2 and cutadapt plugin log files  |
+| Report_data/boxplot-forward.png  | Boxplot of forward read used in report  |
+| Report_data/boxplot-reverse.png  | Boxplot of reverse read used in report |
+| manifest/manifest.tsv  | Sample metadata used to assign sequence files to samples  |
 
 ## Running the pipeline using terminal commands (Windows/Linux)  
 If you are confortable using the command line and Docker is installed
 the following can be used to run the pipeline without the user interface.  
 ```
-docker pull dwheelerau/edna:edna
+docker pull dwheelerau/edna
 ```
 Downloading the image (~7GB) will take some time depending on your internet connnection.
 
