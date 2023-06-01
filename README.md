@@ -1,7 +1,7 @@
 # The eDNA-container app
 
 ## Introduction
-A Docker image containing a eDNA/amplicon pipeline based on
+A Docker image containing a eDNA pipeline based on
 [QIIME2](https://qiime2.org/). The pipeline is controlled via flask GUI that runs
 in the users browser.   
 
@@ -17,13 +17,99 @@ in the users browser.
 The pipeline can also be used without Docker as described at this [repo](https://bitbucket.org/dpi_data_analytics/snakemake-qiime-edna/src/master/).  
 
 ## Running the image in a container on Windows
-Ensure that the Docker-desktop app is installed on your windows computer. A 
-complete guide for installing and running Docker images in general can be found
-at [here](https://github.com/dwheelerau/docker-guide).  
+Ensure that the Docker-desktop app is installed on your windows computer. The
+offical guide for installing Docker-desktop can be found [here](https://docs.docker.com/desktop/install/windows-install/).
+If you run into any issues a more complete guide is available
+[here](https://github.com/dwheelerau/docker-guide).  
 
-1. Start by opening the Docker-desktop app (this needs to be running for the following to work).  
-2. Open the "command prompt" using the windows start menu
-3. Type the following in the terminal window to obtain a copy of the image.  
+1. Start by opening the Docker-desktop app.  
+2. In the search bar at the top of the page search for `dwheelerau/edna`, then use the "Pull"
+button to obtain a copy of the pipeline image.  
+![Search dockerhub for the pipeline image under "dwheelerau/edna"](images/dh1.PNG)
+
+3. After the image has downloaded click the "Run" button.  
+![Start a container using the Run button](images/dh2.PNG)
+
+4. Use the "Optional settings" drop down to open host port 5000 as shown in the image
+below, then click "Run".  
+![Add 5000 to the "Host port" option](images/dh3.PNG)
+
+5. The log section of the container should look like the image below, this is showning the IP
+address for The eDNA-container app user interface, click on the top link or type `http://127.0.0.1:5000`
+in an internet browser (**Note:** No data is transfered over the internet, the pipeline will
+run using the local computer resources).
+![Click on the top link to open the user interface in a browser window](images/dh4.PNG)
+
+6. Please wait a few seconds while the pipeline setup beings, if this has been successful the
+following screen should display.
+![The eDNA-container app welcome screen](images/dh5.PNG)
+
+Follow the instructions below to carry out an eDNA analysis using the pipeline. **Note** for
+future runs on the pipeline all that is required is to click the "Play" Button next to the 
+container ID in the Docker-desktop app. Remember to shutdown the container using the "Stop"
+button to free up system resources after you have completed the analysis.
+
+## Analysing paired-end sequencing data using The eDNA-container app  
+The pipeline is currently only configured to process paired-end fastq.gz sequencing files.
+Ensure that the target directory only contains sequencing data for the samples you wish
+to analyse.
+
+1. Using the browser based user interface select the target folder of `fastq.gz` files that you wish 
+to process through the pipeline and click the "Upload" button (note no data is transfered
+over the internet).  
+![Select the sequencing folder using the file explorer dialogue](images/image4.PNG)
+
+2. Click the "Process folder" button to open the settings page.  
+![The settings page allows you to alter the runtime parameters](images/settings.png)
+
+3. The next page is the settings page, the following table details each option. **Note** 
+be sure to set `trunc-len-f` and `trunc-len-r` to 0 when using variable length amplicons
+in order to avoid introducting trimming biases. We recommend running the pipeline initially
+with the default quality settings and then adjusting these based on the outputs
+pressented in the `final-report.pdf` (specifically the raw read QC plots and DADA2 tables).
+
+| Setting  | Explanation  |
+|---|---|
+| Project name  | A name for your project (will be used as the project title) |
+| Forward primer  | Forward PCR primer sequence for cutadapt primer/adapter removal |
+| Reverse primer  | Reverse PCR primer sequence for cutadapt primer/adapter removal |
+| trunc-len-f  | Remove 3' end of forward read at this position due to low quality  |
+| trunc-len-r  | Remove 3' end of reverse read at this position due to low quality |
+| max-ee-f  | Forward reads with > number expected errors will be discarded  |
+| max-ee-r  | Reverse reads with > number expected errors will be discarded  |
+| trunc-q  | Truncate reads at first instance of quality score <= value |
+| chimera-method  | chimera removal method: consensus, pooled, or none  |
+| Taxonomic database  | File location for a QIIME2 compatible (.qza) naive_bayes clasifier (optional)  |
+
+Table describing the key settings; for additional information see the 
+[DADA2](https://docs.qiime2.org/2023.2/plugins/available/dada2/denoise-paired/)
+and [naive_bayes classifier](https://docs.qiime2.org/2022.2/plugins/available/feature-classifier/fit-classifier-naive-bayes/) 
+pages. A classifier based on the MIDORI2 database (12S rRNA) and the Telo fish primer amplicon
+is provided as a default (F:5'ACACCGCCCGTCAYYCT3'/R:5'CTTCCGGTAYACTTACCRTG3'). 
+
+4. When you are ready click the "Run pipeline!" command to start the analysis. A data submitted screen (below)
+will be replaced by a Download data link once the pipeline has completed. As noted before this analysis
+is performed on your own computer inside your local Docker environment with the download link a shortcut
+to data stored inside the eDNA-container app.
+
+## Key outputs
+| file path  | Explanation  |
+|---|---|
+| fina-report.pdf  | A PDF report describing some key outputs from your run |
+|   |  |
+|   |  |
+|   |   |
+|   |  |
+|   |   |
+|   |   |
+|   |  |
+|   |   |
+|   |   |
+
+
+### 
+
+## Running the pipeline using terminal commands  
 ```
 docker pull dwheelerau/edna:edna
 ```
