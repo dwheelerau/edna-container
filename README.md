@@ -24,7 +24,8 @@ If you run into any issues a more complete guide is available
 
 1. Start by opening the Docker-desktop app.  
 2. In the search bar at the top of the page search for `dwheelerau/edna`, then use the "Pull"
-button to obtain a copy of the pipeline image.  
+button to obtain a copy of the pipeline image. Downloading the image (~7GB) will take some time depending 
+on your internet connnection. 
 ![Search dockerhub for the pipeline image under "dwheelerau/edna"](images/dh1.PNG)
 
 3. After the image has downloaded click the "Run" button.  
@@ -73,8 +74,8 @@ pressented in the `final-report.pdf` (specifically the raw read QC plots and DAD
 | Project name  | A name for your project (will be used as the project title) |
 | Forward primer  | Forward PCR primer sequence for cutadapt primer/adapter removal |
 | Reverse primer  | Reverse PCR primer sequence for cutadapt primer/adapter removal |
-| trunc-len-f  | Remove 3' end of forward read at this position due to low quality  |
-| trunc-len-r  | Remove 3' end of reverse read at this position due to low quality |
+| trunc-len-f  | Remove 3' end of forward read at this position due to low quality (0=no trim)  |
+| trunc-len-r  | Remove 3' end of reverse read at this position due to low quality (0=no trim) |
 | max-ee-f  | Forward reads with > number expected errors will be discarded  |
 | max-ee-r  | Reverse reads with > number expected errors will be discarded  |
 | trunc-q  | Truncate reads at first instance of quality score <= value |
@@ -91,14 +92,19 @@ is provided as a default (F:5'ACACCGCCCGTCAYYCT3'/R:5'CTTCCGGTAYACTTACCRTG3').
 will be replaced by a Download data link once the pipeline has completed. As noted before this analysis
 is performed on your own computer inside your local Docker environment with the download link a shortcut
 to data stored inside the eDNA-container app.
+[The download results page](images/complete.png)
+
+A summary of the key outputs are below. If any of these are missing it is likely the pipeline has failed on your
+data, if this occurs see the FAQ. Any file ending in .qzv can be viewed by drag and drop into the 
+[QIIME2 viewer](https://view.qiime2.org/).
 
 ## Key outputs
 | file path  | Explanation  |
 |---|---|
-| fina-report.pdf  | A PDF report describing some key outputs from your run |
-|   |  |
-|   |  |
-|   |   |
+| final-report.pdf  | A PDF report describing some key outputs from your run |
+| qiime2/loci/asvs/asv_count_tax_seqs_summary.csv  | Final spreadsheet of eDNA taxa counts  |
+| rarefaction/viz/barchart.qzv  | Alpha diversity rarefaction plot viewable using the qiime2 viewer  |
+| qiime2/loci/paired-end-demux.qzv  | Read quality plots viewable using the qiime2 viewer  |
 |   |  |
 |   |   |
 |   |   |
@@ -107,9 +113,10 @@ to data stored inside the eDNA-container app.
 |   |   |
 
 
-### 
 
-## Running the pipeline using terminal commands  
+## Running the pipeline using terminal commands (Windows/Linux)  
+If you are confortable using the command line and Docker is installed
+the following can be used to run the pipeline without the user interface.  
 ```
 docker pull dwheelerau/edna:edna
 ```
@@ -180,3 +187,23 @@ cd edna-contained
 sudo docker build -f Dockerfile . -t dwheelerau/edna:edna
 ```
 Once the image is stored on your computer the `docker run` command can be used to run the app.
+
+## FAQ
+Key outputs are not included in the ZIP file?
+The most likely explanation is that the analysis has failed. Error message will be printed to
+the Docker terminal window (logs tab), check here for any messages. The success or otherwise of 
+each rule in the pipeline should highlight what went wrong. The most common errors are:
+- Overly stringent trimming removing the region of overlap between the forward and reverse read
+- Overly stringent quality trimming removing the region of overlap between the forward and reverse read
+- providing a taxonomic sequence database that does not overlap your amplicon
+
+The files that would be most useful to diagnose these issues are listed below, these can be
+viewed with the [QIIME2 viewer](https://view.qiime2.org/) via drag and drop:
+- XXXX
+- xxxx
+
+## ToDo
+- Set the -p-max-depth in alpha refaction based on max number of sequence reads
+- Provide an example dataset
+- Remove branding
+- Building database help
