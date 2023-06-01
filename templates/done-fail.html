@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <p class="lead">Something went wrong!! </p>
+    Please check <a href="https://github.com/dwheelerau/edna-container">this</a> page for some helpful hints on what could have gone wrong. Also
+    check the terminal log on Docker desktop for error messages. Log
+    files are also in the "logs" directory of the partial results
+    which can be downloaded below.
+    <p></p>
+    <p class="lead">Click on the link below to download the results. </p>
+		<a href="{{url_for('static', filename='results.zip')}}" download>
+  		Download Link</a>
+    <p></p>
+    <p class="lead">If you found this App useful please cite us: ToDo </p>
+    <p class="mt-5">Click <a href="/">here</a> to re-run the pipeline.  </p>
+</div>
+
+{% endblock %}

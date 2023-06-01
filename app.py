@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+from pathlib import Path
 import sys
 import time
 from flask import Flask, flash, request, redirect, url_for, render_template
@@ -102,7 +103,12 @@ def edit_config():
 # done
 @app.route('/done')
 def done():
-    return render_template('done.html')
+    f_path = Path("./snakemake-qiime-edna/final_results/final-report.pdf")
+
+    if f_path.is_file():
+        return render_template('done.html')
+    else:
+        return render_template('done-fail.html')
 
 @app.route('/running')
 def running():
