@@ -60,13 +60,18 @@ use the default settings).
 
 1. Using the browser based user interface select the target folder of `fastq.gz` files that you wish 
 to process through the pipeline and click the "Upload" button (note no data is transfered
-over the internet).  
+over the internet). **Important note about the infiles**. The app extracts the sample name from
+the sequence filenames, so you may need to rename your sequencing files so they fit the
+following pattern: `SAMPLENAME_R1_001.fastq.gz` and `SAMPLENAME_R2_001.fastq.gz`.
+The SAMPLENAME needs to be the same for both forward (R1) and reverse (R2) reads. It is
+important to include the underscore separator (_) between the SAMPLENAME and the R1/R2
+designation. Also you must include the `_001.fastq.gz` tail in the filename as well. 
 ![Select the sequencing folder using the file explorer dialogue](images/image4.PNG)
 
-2. Click the "Process folder" button to open the settings page.  
+3. Click the "Process folder" button to open the settings page.  
 ![The settings page allows you to alter the runtime parameters](images/settings.png)
 
-3. The next page is the settings page, the following table details each option. **Note** 
+4. The next page is the settings page, the following table details each option. **Note** 
 be sure to set `trunc-len-f` and `trunc-len-r` to 0 when using variable length amplicons
 in order to avoid introducting trimming biases. We recommend running the pipeline initially
 with the default quality settings and then adjusting these based on the outputs
