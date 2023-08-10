@@ -35,7 +35,6 @@ print(FASTQ_FOLDER)
 
 app = Flask(__name__, static_url_path=STATIC_FOLDER, static_folder=STATIC_FOLDER)
 app.secret_key = "secret_key"
-#app.config["FASTQ_FOLDER"] = FASTQ_FOLDER
 
 # home page
 @app.route('/')
@@ -49,9 +48,8 @@ def index():
 @app.route('/infer', methods=['POST'])
 def upload_image():
     print("called POST")
-    #file = request.files['file']
     file_list = request.files.getlist('file')
-    if len(file_list)>0: #and allowed_file(file.filename):
+    if len(file_list)>0: 
         for file in file_list:
             filename = os.path.basename(file.filename)
             dst = os.path.join(FASTQ_FOLDER, filename)
@@ -94,8 +92,7 @@ def edit_config():
         outfile = codecs.open('./snakemake-qiime-edna/config.yaml', 'w', 'utf-8')
         outfile.write(render_file)
         outfile.close()
-        # run the pipeline
-        #runner()
+        # goto the pipeline running page
         return redirect(url_for('running'))
     print('called edit config')
     return render_template('config.html')
@@ -116,7 +113,6 @@ def running():
 
 @app.route('/pipeline')
 def pipeline():
-    #running()
     snakemake_run_cmd = 'snakemake --cores all --snakefile snakemake-qiime-edna/Snakefile --directory ./snakemake-qiime-edna/ all'.split()
     subprocess.run(snakemake_run_cmd, shell=False)
     zip_cmd = 'zip -FSr static/results.zip snakemake-qiime-edna'.split()
