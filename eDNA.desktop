@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=eDNA-app
+Exec=/home/wheeled/projects/202308mduncan/edna-container/eDNA-pipeline
+Terminal=true
+Type=Application
+Icon=/home/wheeled/projects/202308mduncan/edna-container/eDNA_small.png

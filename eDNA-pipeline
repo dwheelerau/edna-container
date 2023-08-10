@@ -1,0 +1,3 @@
+#!/bin/bash
+source /home/wheeled/miniconda3/bin/activate snakemake-qiime2
+python /home/wheeled/projects/202308mduncan/edna-container/app.py 2>&1 | tee -a run_log.txt
