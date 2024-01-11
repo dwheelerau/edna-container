@@ -1,5 +1,19 @@
 # The eDNA-container app
 
+<!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
+   * [Introduction](#introduction)
+   * [Running the image in a container on Windows](#running-the-image-in-a-container-on-windows)
+   * [Analysing paired-end sequencing data using The eDNA-container app  ](#analysing-paired-end-sequencing-data-using-the-edna-container-app)
+   * [Key outputs](#key-outputs)
+   * [The taxonomic database  ](#the-taxonomic-database)
+   * [Running the pipeline using terminal commands (Windows/Linux)  ](#running-the-pipeline-using-terminal-commands-windowslinux)
+   * [Running the image in a container on Linux](#running-the-image-in-a-container-on-linux)
+   * [Building the latest version of the pipeline](#building-the-latest-version-of-the-pipeline)
+   * [Trouble shooting  ](#trouble-shooting)
+   * [ToDo](#todo)
+
+<!-- TOC end -->
+
 ## Introduction
 A Docker image containing a eDNA pipeline based on
 [QIIME2](https://qiime2.org/). The pipeline is controlled via flask GUI that runs
@@ -125,6 +139,22 @@ the defaults with the example data in the testing_data folder.
 | Report_data/boxplot-forward.png  | Boxplot of forward read used in report  |
 | Report_data/boxplot-reverse.png  | Boxplot of reverse read used in report |
 | manifest/manifest.tsv  | Sample metadata used to assign sequence files to samples  |
+
+## The taxonomic database  
+A classifier based on the MIDORI2 database (12S rRNA) and the Telo fish primers 
+(F:5'ACACCGCCCGTCAYYCT3'/R:5'CTTCCGGTAYACTTACCRTG3') amplicon is provided as a default
+database. This database was built using only the amplicon generated using this primer
+combination, so if you have used another primer set you will need to build your own
+database or obtain a pre-built `QZA` database file from a reliable source (ie 
+[Silva 16S sequences](https://data.qiime2.org/2020.8/common/silva-138-99-seqs.qza) and
+[Taxonomy](https://data.qiime2.org/2020.8/common/silva-138-99-tax.qza). 
+
+Building a custom database requires two files, the first being the reference library of sequence 
+barcodes in FASTA format, and the second being a corresponding taxonomy file with IDs that match
+the FASTA headers. Please see the [QIIME2 documentation]((https://library.qiime2.org/plugins/q2-feature-classifier/3/)
+for additional information on building a custom database `QZA` file that is compatible with the eDNA app. 
+We have also provided an example [script](https://bitbucket.org/dpi_data_analytics/snakemake-qiime-edna/src/master/scripts/qiime-create-database.sh)
+that demonstrates the basic workflow.
 
 ## Running the pipeline using terminal commands (Windows/Linux)  
 If you are confortable using the command line and Docker is installed
