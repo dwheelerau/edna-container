@@ -55,8 +55,13 @@ The pipeline is currently only configured to process paired-end fastq.gz sequenc
 Ensure that the target directory only contains sequencing data for the samples you wish
 to analyse.
 
-We have included test data in the test_data folder if you wish to try out the pipeline (just
-use the default settings).
+If this is your first time using the app, we recommend that you initially try using the 
+test data. To do this download the [fastq_data](https://drive.google.com/drive/folders/1I2tW-JdF_V5pecJsXIj28Wi6NK-WmwNR?usp=drive_link).
+folder to your computer and select this when prompted by the app. This is only a small dataset so it 
+should run reasonably quickly even on modest systems. An example of the results
+when the pipeline runs successfully can also be found at the previous link as a zip file.
+If you have any trouble running the app on this dataset please see the Trouble shooting section
+below. 
 
 1. Using the browser based user interface select the target folder of `fastq.gz` files that you wish 
 to process through the pipeline and click the "Upload" button (note no data is transfered
@@ -195,22 +200,26 @@ sudo docker build -f Dockerfile . -t dwheelerau/edna:edna
 ```
 Once the image is stored on your computer the `docker run` command can be used to run the app.
 
-## FAQ
-Key outputs are not included in the ZIP file?
+## Trouble shooting  
+**Key outputs are not included in the ZIP file?**
 The most likely explanation is that the analysis has failed. Error message will be printed to
 the Docker terminal window (logs tab), check here for any messages. The success or otherwise of 
-each rule in the pipeline should highlight what went wrong. The most common errors are:
+each rule in the pipeline should highlight what went wrong. If the PDF report is generated
+also check the results in the tables, if they report that 0% reads passed filtering then this would
+indicate an issue with the filtering and QC settings. The most common errors are:
 - Overly stringent trimming removing the region of overlap between the forward and reverse read
 - Overly stringent quality trimming removing the region of overlap between the forward and reverse read
 - providing a taxonomic sequence database that does not overlap your amplicon
+- incorrect primer sequences provided (the app will discard all reads which don't contain the expected primers)
 
-The files that would be most useful to diagnose these issues are listed below, these can be
-viewed with the [QIIME2 viewer](https://view.qiime2.org/) via drag and drop:
-- XXXX
-- xxxx
+**The dada2 step keeps failing**. This is the most resource intensive step of the pipeline and it can fail
+if the hsot computer does not have enough memory to process the provided data. One solution here is to
+make more memory available to Docker by changing the memory settings (under resources in the settings) in docker desktop. 
+If this does not work you may need to access a more powerful computer. 
+
+Another common reason for the dada2 step to fail is that there are no ASV's available after QC and trimming. This could
+be caused by over-stringent QC settings, or due to providing the incorrect primer sequences during the setup process for
+the app. 
 
 ## ToDo
-- Set the -p-max-depth in alpha refaction based on max number of sequence reads
-- Provide an example dataset
-- Remove branding
 - Building database help
