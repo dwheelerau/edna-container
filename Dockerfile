@@ -31,7 +31,7 @@ COPY . .
 #RUN chmod +x boot.sh
 
 # clone the repo
-RUN git clone https://dpidave@bitbucket.org/dpi_data_analytics/snakemake-qiime-edna.git
+RUN git clone --depth=1 --branch 'v1.51' https://dpidave@bitbucket.org/dpi_data_analytics/snakemake-qiime-edna.git
 
 RUN conda env create -f snakemake-qiime-edna/env/qiime2-2023.2-snakemake-py38-linux-conda.yml
 
